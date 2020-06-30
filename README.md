@@ -54,7 +54,7 @@ We provide two example ROSBAGs with dark image data to allow the testing of the 
  - [ROSBAG #2](https://drive.google.com/file/d/1AEw-GsMq2iI83mctI6su5A2qq9R__Lga/view?usp=sharing)
 
 ### Example Output
-![](https://github.com/unr-arl/image_dehaze/blob/master/imgs/smaller_long_tunnel_low_res.gif)
+![](https://github.com/unr-arl/image_brighten_ros/blob/master/imgs/smaller_long_tunnel_low_res.gif)
 
 ## GPU
 GPU Implementation Coming Soon!
