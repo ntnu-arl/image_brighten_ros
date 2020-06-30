@@ -62,7 +62,7 @@ GPU Implementation Coming Soon!
 ## Credits
 To develop this software package we relied or took inspiration from the implementations in:
  - [Original Dehaze (Dark Channel Prior + Guided Filter)](https://github.com/ZQPei/Haze_Removal_cpp)
- - [Fast Guided Filter Adapted From](http://kaiminghe.com/eccv10/) 
+ - [Fast Guided Filter](http://kaiminghe.com/eccv10/) 
 
 ## References
 > He, K., Sun, J. and Tang, X., 2012. Guided image filtering. IEEE transactions on pattern analysis and machine intelligence, 35(6), pp.1397-1409.
