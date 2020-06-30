@@ -1,0 +1,37 @@
+<launch>
+  <arg name="topic_image_input" default="/cam0/cam0" />
+
+  <!-- <node name="image_throttler" type="throttle" pkg="topic_tools" args="messages 
+              $(arg topic_image_input) 1.0 $(arg topic_image_input)/throttled" /> -->
+
+  <node pkg="image_brighten" name="image_brighten" type="image_brighten_node" clear_params="true" output="screen">
+
+    <param name="enable_dyn_reconf" value="true" type="bool" />
+
+    <param name="topic_image_input" value="$(arg topic_image_input)" type="str" />
+    <param name="topic_image_output" value="$(arg topic_image_input)/bright" type="str" />
+
+    # If disabled, node simply republishes resized image
+    <param name="enable_brighten" value="true" type="bool" />
+
+    # Get the latest frame at this frequency (may run slower, always processes latest frame)
+    <param name="max_process_freq" value="20" type="double" />
+
+    # Pre Processing Rescale Factor: a factor of 2 will divide the resolution by 2
+    <param name="scale_factor" value="1" type="int" />
+
+    # Dark Channel Search Radius
+    <param name="dark_ch_scale" value="4" type="int" />
+    <param name="transmission_scale" value="4" type="int" />
+    <param name="dehaze_radius" value="5" type="int" />
+    <param name="dehaze_omega" value="0.85" type="double" />
+    <param name="dehaze_t0" value="0.15" type="double" />
+
+    # Guided Filter Radius
+    <param name="guided_filter_radius" value="45" type="int" />
+    <param name="guided_filter_eps" value="0.05" type="double" />
+
+    # Factor to rescale Guided Filter Input (Quality depends on the input scaling factor)
+    <param name="guided_filter_resize_factor" value="4" type="int" />
+  </node>
+</launch>
