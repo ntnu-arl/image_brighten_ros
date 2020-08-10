@@ -3,7 +3,7 @@
 
 #define OUTPUT_TIMING_STATS false
 
-imageBrighten::imageBrighten(ros::NodeHandle &n, const std::string &s, int bufSize): m_image_buffer(1), m_image_transport(n)
+imageBrighten::imageBrighten(ros::NodeHandle &n, ros::NodeHandle &n_private, const std::string &s, int bufSize): m_image_buffer(1), m_image_transport(n)
 {
 	// parameters
 	n.getParam("enable_dyn_reconf", m_enable_dyn_reconf);
@@ -16,9 +16,9 @@ imageBrighten::imageBrighten(ros::NodeHandle &n, const std::string &s, int bufSi
 
 	// ros parameters
 	m_topic_image_input=  std::string("/cam0/cam0");
-	n.getParam("topic_image_input", m_topic_image_input);
+	n_private.getParam("topic_image_input", m_topic_image_input);
 	m_topic_image_output =  m_topic_image_input + "/bright";
-	n.getParam("topic_image_output", m_topic_image_output);
+	n_private.getParam("topic_image_output", m_topic_image_output);
 	m_scale_factor =  2;
 	n.getParam("scale_factor", m_scale_factor);
 	m_enable_brighten =  true;

@@ -14,7 +14,11 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   dynamic_reconfigure
   cv_bridge
+  nodelet
 )
+
+set("OpenCV_DIR" "/usr/share/OpenCV") #FORCE SYSTEM VERSION
+
 find_package( OpenCV REQUIRED )
 
 # dynamic reconfigure
@@ -38,6 +42,11 @@ add_library(${PROJECT_NAME} src/${PROJECT_NAME}.cpp)
 add_library(dehaze src/dehaze.cpp)
 add_library(guided_filter src/guided_filter.cpp)
 
+## Nodelet
+add_library(${PROJECT_NAME}_nodelet
+    src/image_brighten_nodelet.cpp
+)
+
 add_executable(${PROJECT_NAME}_node src/${PROJECT_NAME}_node.cpp)
 
 add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
@@ -50,5 +59,10 @@ target_link_libraries(${PROJECT_NAME}_node
   guided_filter
 )
 
-
-
+target_link_libraries(${PROJECT_NAME}_nodelet
+  ${PROJECT_NAME}
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+  dehaze
+  guided_filter
+)

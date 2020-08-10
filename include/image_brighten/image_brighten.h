@@ -17,7 +17,7 @@ class imageBrighten
 {
 
 public:
-	imageBrighten(ros::NodeHandle &n, const std::string &s, int bufSize);
+	imageBrighten(ros::NodeHandle &n, ros::NodeHandle &n_private, const std::string &s, int bufSize);
 	~imageBrighten();
 	void callback_image_input(const sensor_msgs::ImageConstPtr &msg);
 	void callback_dyn_reconf(image_brighten::ImageBrightenConfig &config, uint32_t level);
