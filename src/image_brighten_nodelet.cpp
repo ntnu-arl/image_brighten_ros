@@ -20,11 +20,9 @@ class imageBrightenNodelet : public nodelet::Nodelet {
       nh_private_ = getPrivateNodeHandle();
 
       imageBrighten *image_brighten_obj = new imageBrighten(nh_, nh_private_, "image_brighten_nodelet", 100);
-
-      // RosInitialization here
     }
 
-    ros::NodeHandle nh_, nh_private_; // Does not seem to need the ("~") in te nodelet case
+    ros::NodeHandle nh_, nh_private_;
 };
 
 //Declare as a Plug-in
