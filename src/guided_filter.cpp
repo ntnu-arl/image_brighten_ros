@@ -57,7 +57,7 @@ void GuidedFilterColor::filter(const cv::Mat &I, const cv::Mat &p, cv::Mat &resu
 		I.convertTo(reformated_I, CV_32F);
 	else
 		reformated_I = I.clone();
-	cv::resize(reformated_I, resized_I, m_resized_size, 0, 0, cv::INTER_NN); // NN recommended by matlab code
+	cv::resize(reformated_I, resized_I, m_resized_size, 0, 0, cv::INTER_NEAREST); // NN recommended by matlab code
 
 	m_original_I_depth = resized_I.depth();
 
@@ -97,8 +97,8 @@ void GuidedFilterColor::filter(const cv::Mat &I, const cv::Mat &p, cv::Mat &resu
 	invgb /= covDet;
 	invbb /= covDet;
 
-	cv::resize(p, resized_p, m_resized_size, 0, 0, CV_INTER_NN);
-
+	cv::resize(p, resized_p, m_resized_size, 0, 0, cv::INTER_NEAREST);
+	
 	boxfilter(resized_p, mean_p, m_sub_radius);
 
 	boxfilter(Ichannels[0].mul(resized_p), mean_Ip_r, m_sub_radius);

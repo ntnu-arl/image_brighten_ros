@@ -87,7 +87,7 @@ namespace dehaze
 	void CHazeRemoval::get_dark_channel()
 	{
 		m_light_pixel_vect.clear();
-		cv::resize(m_in_frame, m_dark_ch_resized_i, m_dark_ch_resized_i.size(), 0, 0, cv::INTER_NN);
+		cv::resize(m_in_frame, m_dark_ch_resized_i, m_dark_ch_resized_i.size(), 0, 0, cv::INTER_NEAREST);
 		/*
 			1. Iterate over each pixel and save the smallest rgb vals for each pixel in pix_mins
 			2. Iterate over each pixel, Iterate over that pixel's row neighbors, save the smallest value in row_mins
@@ -168,7 +168,7 @@ namespace dehaze
 	}
 	void CHazeRemoval::get_transmission()
 	{
-		cv::resize(m_in_frame, m_transmission_resized_i, m_transmission_resized_i.size(), 0, 0, cv::INTER_NN);
+		cv::resize(m_in_frame, m_transmission_resized_i, m_transmission_resized_i.size(), 0, 0, cv::INTER_NEAREST);
 		// pre calculate the minimum pixel values for each pixel, so they're calculated n times, not n*m times
 		unsigned long int pix_idx = 0;
 		for (int i = 0; i < m_transmission_resized_i.rows; ++i)
