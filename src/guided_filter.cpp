@@ -98,7 +98,7 @@ void GuidedFilterColor::filter(const cv::Mat &I, const cv::Mat &p, cv::Mat &resu
 	invbb /= covDet;
 
 	cv::resize(p, resized_p, m_resized_size, 0, 0, cv::INTER_NEAREST);
-	
+
 	boxfilter(resized_p, mean_p, m_sub_radius);
 
 	boxfilter(Ichannels[0].mul(resized_p), mean_Ip_r, m_sub_radius);
@@ -125,5 +125,5 @@ void GuidedFilterColor::filter(const cv::Mat &I, const cv::Mat &p, cv::Mat &resu
 	boxfilter(b, temp, m_sub_radius);
 	result += temp;
 
-	cv::resize(result, result, m_original_image_size, 0,0, CV_INTER_NN);
+	cv::resize(result, result, m_original_image_size, 0,0, cv::INTER_NEAREST);
 }
