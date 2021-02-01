@@ -57,7 +57,7 @@ void GuidedFilterColor::filter(const cv::Mat &I, const cv::Mat &p, cv::Mat &resu
 		I.convertTo(reformated_I, CV_32F);
 	else
 		reformated_I = I.clone();
-	cv::resize(reformated_I, resized_I, m_resized_size, 0, 0, CV_INTER_NN); // NN recommended by matlab code
+	cv::resize(reformated_I, resized_I, m_resized_size, 0, 0, cv::INTER_NN); // NN recommended by matlab code
 
 	m_original_I_depth = resized_I.depth();
 
@@ -68,11 +68,11 @@ void GuidedFilterColor::filter(const cv::Mat &I, const cv::Mat &p, cv::Mat &resu
 	boxfilter(Ichannels[2], mean_I_b, m_sub_radius);
 
 	boxfilter(Ichannels[0].mul(Ichannels[0]), var_I_rr, m_sub_radius);
-	boxfilter(Ichannels[0].mul(Ichannels[1]), var_I_rg, m_sub_radius); 
-	boxfilter(Ichannels[0].mul(Ichannels[2]), var_I_rb, m_sub_radius); 
-	boxfilter(Ichannels[1].mul(Ichannels[1]), var_I_gg, m_sub_radius); 
-	boxfilter(Ichannels[1].mul(Ichannels[2]), var_I_gb, m_sub_radius); 
-	boxfilter(Ichannels[2].mul(Ichannels[2]), var_I_bb, m_sub_radius); 
+	boxfilter(Ichannels[0].mul(Ichannels[1]), var_I_rg, m_sub_radius);
+	boxfilter(Ichannels[0].mul(Ichannels[2]), var_I_rb, m_sub_radius);
+	boxfilter(Ichannels[1].mul(Ichannels[1]), var_I_gg, m_sub_radius);
+	boxfilter(Ichannels[1].mul(Ichannels[2]), var_I_gb, m_sub_radius);
+	boxfilter(Ichannels[2].mul(Ichannels[2]), var_I_bb, m_sub_radius);
 
 	var_I_rr = var_I_rr - mean_I_r.mul(mean_I_r) + m_eps;
 	var_I_rg = var_I_rg - mean_I_r.mul(mean_I_g);
