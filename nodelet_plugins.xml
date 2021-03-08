@@ -1,0 +1,8 @@
+<library path="lib/libimage_brighten_nodelet">
+
+  <!-- Image Brighten Plugin -->
+  <class name="image_brighten_nodelet" type="imageBrightenNodelet" base_class_type="nodelet::Nodelet">
+    <description>This is the Image Brighten ROS Nodelet.</description>
+  </class>
+
+</library> 

@@ -3,10 +3,10 @@
 
 #define OUTPUT_TIMING_STATS false
 
-imageBrighten::imageBrighten(ros::NodeHandle &n, const std::string &s, int bufSize): m_image_buffer(1), m_image_transport(n)
+imageBrighten::imageBrighten(ros::NodeHandle &n, ros::NodeHandle &n_private, const std::string &s, int bufSize): m_image_buffer(1), m_image_transport(n)
 {
 	// parameters
-	n.getParam("enable_dyn_reconf", m_enable_dyn_reconf);
+	n_private.getParam("enable_dyn_reconf", m_enable_dyn_reconf);
 
 	if (m_enable_dyn_reconf)
 	{
@@ -16,35 +16,35 @@ imageBrighten::imageBrighten(ros::NodeHandle &n, const std::string &s, int bufSi
 
 	// ros parameters
 	m_topic_image_input=  std::string("/cam0/cam0");
-	n.getParam("topic_image_input", m_topic_image_input);
+	n_private.getParam("topic_image_input", m_topic_image_input);
 	m_topic_image_output =  m_topic_image_input + "/bright";
-	n.getParam("topic_image_output", m_topic_image_output);
+	n_private.getParam("topic_image_output", m_topic_image_output);
 	m_scale_factor =  2;
-	n.getParam("scale_factor", m_scale_factor);
+	n_private.getParam("scale_factor", m_scale_factor);
 	m_enable_brighten =  true;
-	n.getParam("enable_brighten", m_enable_brighten);
+	n_private.getParam("enable_brighten", m_enable_brighten);
 	m_proc_freq =  1.0;
-	n.getParam("max_process_freq", m_proc_freq);
+	n_private.getParam("max_process_freq", m_proc_freq);
 
 	// dehaze Parameters
 	m_dark_ch_scale = 4;
-	n.getParam("dark_ch_scale", m_dark_ch_scale);
+	n_private.getParam("dark_ch_scale", m_dark_ch_scale);
 	m_transmission_scale = 4;
-	n.getParam("transmission_scale", m_transmission_scale);
+	n_private.getParam("transmission_scale", m_transmission_scale);
 	m_dehaze_radius =  5;
-	n.getParam("dehaze_radius", m_dehaze_radius);
+	n_private.getParam("dehaze_radius", m_dehaze_radius);
 	m_dehaze_omega =  0.85;
-	n.getParam("dehaze_omega", m_dehaze_omega);
+	n_private.getParam("dehaze_omega", m_dehaze_omega);
 	m_dehaze_t0 =  0.1;
-	n.getParam("dehaze_t0", m_dehaze_t0);
+	n_private.getParam("dehaze_t0", m_dehaze_t0);
 	
 	// guided filter Parameters
 	m_guided_filter_radius =  25;
-	n.getParam("guided_filter_radius", m_guided_filter_radius);
+	n_private.getParam("guided_filter_radius", m_guided_filter_radius);
 	m_guided_filter_eps =  0.05;
-	n.getParam("guided_filter_eps", m_guided_filter_eps);
+	n_private.getParam("guided_filter_eps", m_guided_filter_eps);
 	m_guided_filter_resize_factor =  4;
-	n.getParam("guided_filter_resize_factor", m_guided_filter_resize_factor);
+	n_private.getParam("guided_filter_resize_factor", m_guided_filter_resize_factor);
 
 	m_sub_image = m_image_transport.subscribe(m_topic_image_input, 10, &imageBrighten::callback_image_input, this);
 	m_pub_brighten_image = m_image_transport.advertise(m_topic_image_output, 10);
