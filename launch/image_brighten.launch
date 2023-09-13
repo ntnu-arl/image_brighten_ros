@@ -1,15 +1,17 @@
 <launch>
   <arg name="topic_image_input" default="/cam0/cam0" />
+  <arg name="topic_image_output" default="/cam0/cam0" />
+  <arg name="node_name" default="image_brighten"/>
 
   <!-- <node name="image_throttler" type="throttle" pkg="topic_tools" args="messages 
               $(arg topic_image_input) 1.0 $(arg topic_image_input)/throttled" /> -->
 
-  <node pkg="image_brighten" name="image_brighten" type="image_brighten_node" clear_params="true" output="screen">
+  <node pkg="image_brighten" name="$(arg node_name)" type="image_brighten_node" clear_params="true" output="screen">
 
     <param name="enable_dyn_reconf" value="true" type="bool" />
 
     <param name="topic_image_input" value="$(arg topic_image_input)" type="str" />
-    <param name="topic_image_output" value="$(arg topic_image_input)/bright" type="str" />
+    <param name="topic_image_output" value="$(arg topic_image_output)" type="str" />
 
     # If disabled, node simply republishes resized image
     <param name="enable_brighten" value="true" type="bool" />
